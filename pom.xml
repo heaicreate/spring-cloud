@@ -15,7 +15,7 @@
     <name>spring-cloud</name>
     <description>Demo project for Spring Boot</description>
     <properties>
-        <nacos-config-spring-boot.version>0.2.1</nacos-config-spring-boot.version>
+        <nacos-config-spring-boot.version>0.2.12</nacos-config-spring-boot.version>
     </properties>
     <dependencies>
         <dependency>
@@ -60,13 +60,19 @@
             <groupId>com.alibaba.boot</groupId>
             <artifactId>nacos-config-spring-boot-starter</artifactId>
             <version>${nacos-config-spring-boot.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.cloud</groupId>
+                    <artifactId>spring-cloud-starter-bootstrap</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
-        <dependency>
-            <groupId>com.alibaba.boot</groupId>
-            <artifactId>nacos-config-spring-boot-actuator</artifactId>
-            <version>${nacos-config-spring-boot.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba.boot</groupId>-->
+<!--            <artifactId>nacos-config-spring-boot-actuator</artifactId>-->
+<!--            <version>${nacos-config-spring-boot.version}</version>-->
+<!--        </dependency>-->
 
     </dependencies>
 
