@@ -26,4 +26,23 @@ nacos:
     auto-refresh: true
     bootstrap:
       enable: true
+  discovery:
+    server-addr: 127.0.0.1:8848
+    auto-register: true
+    register:
+      enabled: true
+      ephemeral: true
+      groupName: boot
+      healthy: true
+      clusterName: SPRINGBOOT
+      weight: 0.6D
+      metadata:
+        username: test
+    namespace: 5e1b94a2-2fb4-425e-8058-27341eddf452
+
+
+spring:
+  application:
+    name: SPRING_BOOT_SERVICE
+
 

@@ -1,6 +1,5 @@
 package com.example.springCloud.config;
 
-import com.alibaba.nacos.api.config.annotation.NacosValue;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
@@ -15,7 +14,6 @@ public class RedissonConfig {
     private String redisHost;
     @Value(value = "${spring.redis.port:}")
     private String redisPort;
-
 
 
     @Bean
