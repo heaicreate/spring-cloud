@@ -26,17 +26,17 @@ nacos:
     auto-refresh: true
     bootstrap:
       enable: true
-  discovery:
-    server-addr: 127.0.0.1:8848
-    auto-register: true
-    register:
-      enabled: true
-      ephemeral: true
-      groupName: boot
-      healthy: true
-      clusterName: springboot
-      weight: 0.6D
-    namespace: 5e1b94a2-2fb4-425e-8058-27341eddf452
+#  discovery:
+#    server-addr: 127.0.0.1:8848
+#    auto-register: true
+#    register:
+#      enabled: true
+#      ephemeral: true
+#      groupName: boot
+#      healthy: true
+#      clusterName: springboot
+#      weight: 0.6D
+#    namespace: 5e1b94a2-2fb4-425e-8058-27341eddf452
 
 
 spring:
@@ -46,9 +46,18 @@ spring:
     loadbalancer:
       ribbon:
         enabled: false
-    discovery:
+    nacos:
+     discovery:
       server-addr: 127.0.0.1:8848
       auto-register: true
+      namespace: 5e1b94a2-2fb4-425e-8058-27341eddf452
+      register:
+        enabled: true
+        healthy: true
+        ephemeral: true
+        clusterName: springboot
+        groupName: DEFAULT_GROUP
+        weight: 1
 feign:
   client:
     config:
