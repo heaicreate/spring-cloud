@@ -11,6 +11,7 @@ import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 
@@ -25,19 +26,20 @@ public class TestController {
     @NacosValue(value = "${test.t1:}", autoRefreshed = true)
     private String t1;
 
+//
+//    @Autowired
+//    RestTemplate restTemplate;
     @GetMapping("/test")
     public String test() {
         System.out.println(t1);
-        String test = springCloudNacosProviderClient.test();
         Response<UserPo> test1 = springCloudNacosProviderClient.test1();
-        System.out.println(test1.getData().getAge());
         //https://www.cnblogs.com/jelly12345/p/14699492.html
         //https://cloud.tencent.com/developer/article/1730297
         RLock lock = redissonClient.getLock("anyLock");
         lock.lock();
         lock.unlock();
         redisUtils.setStr("test", "test1", 1000l);
-        return "66";
+        return test1.getData().getAge()+"";
     }
 
     @GetMapping("/test1")

@@ -46,6 +46,9 @@ spring:
     loadbalancer:
       ribbon:
         enabled: false
+      cache:
+        enabled: false
+      enabled: true
     nacos:
      discovery:
       server-addr: 127.0.0.1:8848
