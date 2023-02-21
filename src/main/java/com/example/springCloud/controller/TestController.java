@@ -11,7 +11,6 @@ import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 
@@ -21,7 +20,7 @@ public class TestController {
     private RedisUtils redisUtils;
     @Resource
     SpringCloudNacosProviderClient springCloudNacosProviderClient;
-    @Autowired
+    @Resource
     RedissonClient redissonClient;
     @NacosValue(value = "${test.t1:}", autoRefreshed = true)
     private String t1;

@@ -47,7 +47,7 @@ spring:
       ribbon:
         enabled: false
       cache:
-        enabled: false
+        enabled: true
       enabled: true
     nacos:
      discovery:

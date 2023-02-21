@@ -12,7 +12,6 @@ public interface SpringCloudNacosProviderClient {
     @GetMapping(path = "test")
     String test();
 
-    @LoadBalanced
     @GetMapping(path = "test1")
     Response<UserPo> test1();
 }

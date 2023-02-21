@@ -53,7 +53,7 @@ public class RandomLoadBalancerCustomization implements ReactorServiceInstanceLo
             return new EmptyResponse();
         } else {
             int index = ThreadLocalRandom.current().nextInt(instances.size());
-            ServiceInstance instance = (ServiceInstance) instances.get(2);
+            ServiceInstance instance = (ServiceInstance) instances.get(0);
             return new DefaultResponse(instance);
         }
     }
