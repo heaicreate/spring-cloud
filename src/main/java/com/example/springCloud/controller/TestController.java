@@ -9,6 +9,7 @@ import com.example.springCloud.util.RedisUtils;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,19 +26,26 @@ public class TestController {
     @NacosValue(value = "${test.t1:}", autoRefreshed = true)
     private String t1;
 
-//
-//    @Autowired
-//    RestTemplate restTemplate;
     @GetMapping("/test")
     public String test() {
+        StopWatch stopWatch=new StopWatch("test");
+        stopWatch.start("开始");
         System.out.println(t1);
+        stopWatch.stop();
+        stopWatch.start("远端请求");
         Response<UserPo> test1 = springCloudNacosProviderClient.test1();
+        stopWatch.stop();
         //https://www.cnblogs.com/jelly12345/p/14699492.html
         //https://cloud.tencent.com/developer/article/1730297
+        stopWatch.start("开始加锁");
         RLock lock = redissonClient.getLock("anyLock");
         lock.lock();
         lock.unlock();
+        stopWatch.stop();
+        stopWatch.start("redis 设置信息");
         redisUtils.setStr("test", "test1", 1000l);
+        stopWatch.stop();
+        System.out.println(stopWatch.prettyPrint());
         return test1.getData().getAge()+"";
     }
 
