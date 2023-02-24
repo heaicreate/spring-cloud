@@ -1,6 +1,5 @@
 package com.example.springCloud.controller;
 
-import com.alibaba.nacos.api.config.annotation.NacosValue;
 import com.example.springCloud.fegin.SpringCloudNacosProviderClient;
 import com.example.springCloud.model.Response;
 import com.example.springCloud.po.UserPo;
@@ -9,6 +8,8 @@ import com.example.springCloud.util.RedisUtils;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 @RestController
+@RefreshScope
 public class TestController {
     @Autowired
     private RedisUtils redisUtils;
@@ -23,7 +25,7 @@ public class TestController {
     SpringCloudNacosProviderClient springCloudNacosProviderClient;
     @Resource
     RedissonClient redissonClient;
-    @NacosValue(value = "${test.t1:}", autoRefreshed = true)
+    @Value(value = "${test.t1:}")
     private String t1;
 
     @GetMapping("/test")
