@@ -1,5 +1,6 @@
 package com.example.springCloud.controller;
 
+import com.alibaba.nacos.api.config.annotation.NacosValue;
 import com.example.springCloud.fegin.SpringCloudNacosProviderClient;
 import com.example.springCloud.model.Response;
 import com.example.springCloud.po.UserPo;
@@ -27,12 +28,15 @@ public class TestController {
     RedissonClient redissonClient;
     @Value(value = "${test.t1:}")
     private String t1;
+    @Value(value = "${test2:}")
+    private String t2;
 
     @GetMapping("/test")
     public String test() {
         StopWatch stopWatch=new StopWatch("test");
         stopWatch.start("开始");
         System.out.println(t1);
+        System.out.println(t2);
         stopWatch.stop();
         stopWatch.start("远端请求");
         Response<UserPo> test1 = springCloudNacosProviderClient.test1();
@@ -58,5 +62,6 @@ public class TestController {
         userPo.setAge(18);
         return ResultWrap.ok(userPo);
     }
+
 
 }

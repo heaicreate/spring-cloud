@@ -1,5 +1,6 @@
 package com.example.springCloud;
 
+import com.alibaba.nacos.api.config.annotation.NacosConfigurationProperties;
 import com.example.springCloud.config.LoadBalancerConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
