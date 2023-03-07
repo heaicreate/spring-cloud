@@ -1,6 +1,5 @@
 package com.example.springCloud.controller;
 
-import com.alibaba.nacos.api.config.annotation.NacosValue;
 import com.example.springCloud.fegin.SpringCloudNacosProviderClient;
 import com.example.springCloud.model.Response;
 import com.example.springCloud.po.UserPo;
@@ -62,6 +61,7 @@ public class TestController {
         userPo.setAge(18);
         return ResultWrap.ok(userPo);
     }
+
 
 
 }

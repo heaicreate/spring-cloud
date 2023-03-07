@@ -42,3 +42,8 @@ A:可用性
 P:分区容错性
 nacos 默认是AP 模式 可切换成CP 模式
 CP模式下 可设置永久节点
+
+feign原理与配置
+feign 本质是封装的http请求 异步线程下会有请求头丢失情况出现
+解决方案1:重新feign 拦截器 重写apply方法 设置请求头传递
+解决方案2:InheritableThreadLocal 设置属性针对子线程可见

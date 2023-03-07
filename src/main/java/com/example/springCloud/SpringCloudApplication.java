@@ -1,7 +1,7 @@
 package com.example.springCloud;
 
-import com.alibaba.nacos.api.config.annotation.NacosConfigurationProperties;
 import com.example.springCloud.config.LoadBalancerConfig;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClients;
@@ -10,6 +10,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableFeignClients
 @LoadBalancerClients(defaultConfiguration = {LoadBalancerConfig.class})
+@Slf4j
 public class SpringCloudApplication {
 
     public static void main(String[] args) {
