@@ -7,6 +7,7 @@ import com.example.springCloud.model.Response;
 import com.example.springCloud.po.LoginInfo;
 import com.example.springCloud.service.CarService;
 import com.example.springCloud.support.ResultWrap;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "car")
 @RefreshScope
+@Slf4j
 public class CarController {
     @Resource
     CarService carService;
@@ -25,6 +27,9 @@ public class CarController {
     @GetMapping(value = "/list")
     @MyLog(name = "测试",requestUrl = "test")
     public Response<List<Car>> getTest(@RequestUser LoginInfo loginInfo) {
-        return ResultWrap.ok(carService.list());
+        log.info("请求");
+        List<Car> cars=carService.list();
+        log.info("完成");
+        return ResultWrap.ok(cars);
     }
 }

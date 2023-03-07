@@ -1,5 +1,6 @@
 package com.example.springCloud.annotation;
 
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -10,6 +11,7 @@ import java.lang.reflect.Method;
 
 @Aspect //AOP 切面
 @Component
+@Slf4j
 public class MyLogAspect {
 
 
@@ -30,8 +32,7 @@ public class MyLogAspect {
     @Around(value = "pointcut() && @annotation(myLog)")
     public Object around(ProceedingJoinPoint point, MyLog myLog) {
 
-        System.out.println("++++执行了around方法++++");
-
+        log.info("执行了around方法");
         String requestUrl = myLog.requestUrl();
 
         //拦截的类名
@@ -39,8 +40,7 @@ public class MyLogAspect {
         //拦截的方法
         Method method = ((MethodSignature) point.getSignature()).getMethod();
 
-        System.out.println("执行了 类:" + clazz + " 方法:" + method + " 自定义请求地址:" + myLog.name());
-
+        log.info("自定义请求地址{}", myLog.name());
         try {
             return point.proceed(); //执行程序
         } catch (Throwable throwable) {
@@ -63,10 +63,7 @@ public class MyLogAspect {
 //        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 //        HttpSession session = request.getSession();
 
-        System.out.println("++++执行了afterReturning方法++++");
-
-        System.out.println("执行结果：" + result);
-
+        log.info("执行结果{}", result);
         return result;
     }
 
@@ -79,8 +76,7 @@ public class MyLogAspect {
      */
     @AfterThrowing(value = "pointcut() && @annotation(myLog)", throwing = "ex")
     public void afterThrowing(JoinPoint joinPoint, MyLog myLog, Exception ex) {
-        System.out.println("++++执行了afterThrowing方法++++");
-        System.out.println("请求：" + myLog.requestUrl() + " 出现异常");
+        log.info("执行了afterThrowing方法");
     }
 
 }

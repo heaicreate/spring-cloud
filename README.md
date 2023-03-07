@@ -47,3 +47,9 @@ feign原理与配置
 feign 本质是封装的http请求 异步线程下会有请求头丢失情况出现
 解决方案1:重新feign 拦截器 重写apply方法 设置请求头传递
 解决方案2:InheritableThreadLocal 设置属性针对子线程可见
+
+
+
+elk日志搭建
+es kibana 进入目录下直接启动
+logstash 进入目录下 bin下使用 ./logstash -f 配置文件(test.conf)
