@@ -76,7 +76,7 @@ public class CodeGenerator {
         // 包配置
         PackageConfig pc = new PackageConfig();
         //  pc.setModuleName(scanner("模块名"));
-        pc.setParent("com.scaffold.test");
+        pc.setParent("com.example.springCloud");
         mpg.setPackageInfo(pc);
 
         // 如果模板引擎是 velocity
@@ -111,7 +111,7 @@ public class CodeGenerator {
         // 写于父类中的公共字段
 //        strategy.setSuperEntityColumns("id");
 //        strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
-        strategy.setInclude("car");
+        strategy.setInclude("test");
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);
