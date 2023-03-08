@@ -1,0 +1,31 @@
+package com.example.springCloud.rebbitmq;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.annotation.RabbitHandler;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.Map;
+/**
+ * 广播交换机队列B--消费者
+ */
+@Component
+@RabbitListener(queues = "fanoutQueueB")
+@Slf4j
+public class FanoutExchangeConsumerB {
+    @Autowired
+    private RabbitTemplate rabbitmqTemplate;
+
+
+    /**
+     * 消费消息
+     *
+     * @RabbitHandler 代表此方法为接受到消息后的处理方法
+     */
+    @RabbitHandler
+    public void receiveMessage(Map msg) {
+        log.info("FanoutExchangeA消费者接收到的消息 :" + msg.toString());
+    }
+}

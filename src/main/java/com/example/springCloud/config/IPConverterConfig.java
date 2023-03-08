@@ -7,6 +7,9 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+/**
+ * 获取ip地址信息
+ */
 public class IPConverterConfig extends ClassicConverter {
 
     @Override
