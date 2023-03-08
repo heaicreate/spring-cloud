@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+    <springProperty scope="context" name="kafkaAddress" source="log.kafka.address" defaultValue="info" />
+    <springProperty scope="context" name="kafkaTopic" source="log.kafka.topic" defaultValue="info" />
     <!-- 日志存放路径 -->
     <property name="log.path" value="/Applications/work/local/data/logs"/>
     <!-- 日志输出格式 -->
@@ -64,10 +66,11 @@
                 %msg%n
             </pattern>
         </encoder>
-        <topic>test2</topic>
+        <topic>${kafkaTopic}</topic>
         <keyingStrategy class="com.github.danielwegener.logback.kafka.keying.NoKeyKeyingStrategy"/>
         <deliveryStrategy class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy"/>
-        <producerConfig>bootstrap.servers=127.0.0.1:9092</producerConfig>
+<!--        <producerConfig>bootstrap.servers=127.0.0.1:9092</producerConfig>-->
+        <producerConfig>bootstrap.servers=${kafkaAddress}</producerConfig>
     </appender>
     <!--   需要再看看异步接入kafka-->
     <!--    <appender name="KAFKAASYNC" class="ch.qos.logback.classic.AsyncAppender">-->
@@ -84,7 +87,7 @@
 
     <!--系统操作日志-->
     <root level="info">
-        <appender-ref ref="file_info"/>
+<!--        <appender-ref ref="file_info"/>-->
         <appender-ref ref="file_error"/>
         <appender-ref ref="kafkaAppender"/>
     </root>

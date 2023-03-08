@@ -27,12 +27,5 @@ feign:
 
 
 
-# kafka配置
-  kafka:
-   appender:
-    bootstrap:
-     servers: localhost:9092
-    topic: test2
-
 
 

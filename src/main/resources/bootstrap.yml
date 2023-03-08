@@ -13,3 +13,7 @@ spring:
         enable_remote_sync_config: true
   application:
     name: spring-cloud
+log:
+  kafka:
+    address: 127.0.0.1:9092
+    topic: test2
