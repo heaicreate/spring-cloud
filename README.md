@@ -53,3 +53,5 @@ feign 本质是封装的http请求 异步线程下会有请求头丢失情况出
 elk日志搭建
 es kibana 进入目录下直接启动
 logstash 进入目录下 bin下使用 ./logstash -f 配置文件(test.conf)
+
+logstash 启动依赖jdk 环境 需要在启动脚本中增加jdk配置
