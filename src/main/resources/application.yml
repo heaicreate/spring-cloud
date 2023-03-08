@@ -26,6 +26,7 @@ feign:
         readTimeout: 5000
 
 
-
+logging:
+  config: classpath:logback-custom.xml
 
 

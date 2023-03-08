@@ -2,11 +2,12 @@
 <configuration>
     <springProperty scope="context" name="kafkaAddress" source="log.kafka.address" defaultValue="info" />
     <springProperty scope="context" name="kafkaTopic" source="log.kafka.topic" defaultValue="info" />
+    <conversionRule conversionWord="ip" converterClass="com.example.springCloud.config.IPConverterConfig" />
     <!-- 日志存放路径 -->
     <property name="log.path" value="/Applications/work/local/data/logs"/>
     <!-- 日志输出格式 -->
     <property name="log.pattern"
-              value="%d{yyyy-MM-dd HH:mm:ss.SSS}-[%X{requestId}] - [%thread] %-5level %logger{20} - [%method,%line] - %msg%n"/>
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS}-[%X{requestId}] -[%ip]- [%thread] %-5level %logger{20} - [%method,%line] - %msg%n"/>
 
     <!-- 控制台输出 -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
@@ -62,14 +63,14 @@
 
     <appender name="kafkaAppender" class="com.github.danielwegener.logback.kafka.KafkaAppender">
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}-[%X{requestId}] - [%thread] %-5level %logger{20} - [%method,%line] -
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}-[%X{requestId}]-[%ip] - [%thread] %-5level %logger{20} - [%method,%line] -
                 %msg%n
             </pattern>
         </encoder>
         <topic>${kafkaTopic}</topic>
         <keyingStrategy class="com.github.danielwegener.logback.kafka.keying.NoKeyKeyingStrategy"/>
         <deliveryStrategy class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy"/>
-<!--        <producerConfig>bootstrap.servers=127.0.0.1:9092</producerConfig>-->
+        <!--        <producerConfig>bootstrap.servers=127.0.0.1:9092</producerConfig>-->
         <producerConfig>bootstrap.servers=${kafkaAddress}</producerConfig>
     </appender>
     <!--   需要再看看异步接入kafka-->
@@ -87,7 +88,7 @@
 
     <!--系统操作日志-->
     <root level="info">
-<!--        <appender-ref ref="file_info"/>-->
+        <!--        <appender-ref ref="file_info"/>-->
         <appender-ref ref="file_error"/>
         <appender-ref ref="kafkaAppender"/>
     </root>
