@@ -14,13 +14,15 @@ public class RedissonConfig {
     private String redisHost;
     @Value(value = "${spring.redis.port:}")
     private String redisPort;
+    @Value(value = "${spring.redis.db:}")
+    private int db;
 
 
     @Bean
     public RedissonClient redissonClient() {
         Config config = new Config();
 //		config.useSingleServer().setAddress("redis://127.0.0.1:6379");
-        config.useSingleServer().setAddress("redis://" + redisHost + ":" + redisPort);
+        config.useSingleServer().setAddress("redis://" + redisHost + ":" + redisPort).setDatabase(db);
         return Redisson.create(config);
     }
 
