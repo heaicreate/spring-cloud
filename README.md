@@ -55,3 +55,6 @@ es kibana 进入目录下直接启动
 logstash 进入目录下 bin下使用 ./logstash -f 配置文件(test.conf)
 
 logstash 启动依赖jdk 环境 需要在启动脚本中增加jdk配置
+rabbitMq 实现延迟队列有两种方式
+1:使用死信队列 TTL和DLX--在正常队列中设置ttl过期时间,到时间转入绑定的死信队列中进行消费
+2:使用延迟插件--声明了一种新的交换机类型
