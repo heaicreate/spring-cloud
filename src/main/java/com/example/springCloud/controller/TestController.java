@@ -5,6 +5,7 @@ import com.example.springCloud.model.Response;
 import com.example.springCloud.po.UserPo;
 import com.example.springCloud.support.ResultWrap;
 import com.example.springCloud.util.RedisUtils;
+import com.example.springCloud.util.SlidingWindowCounter;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +30,12 @@ public class TestController {
     private String t1;
     @Value(value = "${test2:}")
     private String t2;
+    @Resource
+    SlidingWindowCounter slidingWindowCounter;
 
     @GetMapping("/test")
     public String test() {
-        StopWatch stopWatch=new StopWatch("test");
+        StopWatch stopWatch = new StopWatch("test");
         stopWatch.start("开始");
         System.out.println(t1);
         System.out.println(t2);
@@ -51,7 +54,7 @@ public class TestController {
         redisUtils.setStr("test", "test1", 1000l);
         stopWatch.stop();
         System.out.println(stopWatch.prettyPrint());
-        return test1.getData().getAge()+"";
+        return test1.getData().getAge() + "";
     }
 
     @GetMapping("/test1")
@@ -62,6 +65,14 @@ public class TestController {
         return ResultWrap.ok(userPo);
     }
 
+    @GetMapping("/test2")
+    public Response<UserPo> getTest1() {
+        UserPo userPo = new UserPo();
+        userPo.setName("1232312312");
+        userPo.setAge(18);
+        System.out.println(slidingWindowCounter.canAccess("test", 10, 3));
+        return ResultWrap.ok(userPo);
+    }
 
 
 }
