@@ -75,6 +75,37 @@
         <deliveryStrategy class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy"/>
         <!--        <producerConfig>bootstrap.servers=127.0.0.1:9092</producerConfig>-->
         <producerConfig>bootstrap.servers=${kafkaAddress}</producerConfig>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!-- 过滤的级别 -->
+            <level>INFO</level>
+            <!-- 匹配时的操作：接收（记录） -->
+            <onMatch>ACCEPT</onMatch>
+            <!-- 不匹配时的操作：拒绝（不记录） -->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+
+    <appender name="kafkaAppenderError" class="com.github.danielwegener.logback.kafka.KafkaAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}-[%X{requestId}]-[%ip] - [%thread] %-5level %logger{20} -
+                [%method,%line] -
+                %msg%n
+            </pattern>
+        </encoder>
+        <topic>test3</topic>
+        <keyingStrategy class="com.github.danielwegener.logback.kafka.keying.NoKeyKeyingStrategy"/>
+        <deliveryStrategy class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy"/>
+        <!--        <producerConfig>bootstrap.servers=127.0.0.1:9092</producerConfig>-->
+        <producerConfig>bootstrap.servers=${kafkaAddress}</producerConfig>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!-- 过滤的级别 -->
+            <level>ERROR</level>
+            <!-- 匹配时的操作：接收（记录） -->
+            <onMatch>ACCEPT</onMatch>
+            <!-- 不匹配时的操作：拒绝（不记录） -->
+            <onMismatch>DENY</onMismatch>
+        </filter>
     </appender>
     <!--   需要再看看异步接入kafka-->
     <!--    <appender name="KAFKAASYNC" class="ch.qos.logback.classic.AsyncAppender">-->
@@ -91,8 +122,9 @@
 
     <!--系统操作日志-->
     <root level="info">
-        <!--        <appender-ref ref="file_info"/>-->
-        <appender-ref ref="file_error"/>
+<!--        <appender-ref ref="file_info"/>-->
+<!--        <appender-ref ref="file_error"/>-->
         <appender-ref ref="kafkaAppender"/>
+        <appender-ref ref="kafkaAppenderError"/>
     </root>
 </configuration>
