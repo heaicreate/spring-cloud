@@ -60,3 +60,9 @@ rabbitMq 实现延迟队列有两种方式
 2:使用延迟插件--声明了一种新的交换机类型
 
 lsof -i tcp:7300 mac 查看端口占用pid
+
+Sentinel相关(单机)
+https://github.com/alibaba/spring-cloud-alibaba/wiki/Sentinel
+启动:java -Dserver.port=8080 -Dcsp.sentinel.dashboard.server=localhost:8080 -Dproject.name=sentinel-dashboard -jar sentinel-dashboard.jar
+访问地址:http://localhost:8080/#/dashboard/flow/spring-cloud
+sentinel进行懒加载方式,资源访问后才会在控制台出现,进行指定资源的设置;sentinel也提供了异常固定返回,在限流等报错情况下可进行自定义错误返回

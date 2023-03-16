@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<body>
+<head>
+    <meta charset="UTF-8">
+    <title>My WebSocket Test</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+          integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+
+Welcome
+<br />
+<div id="message"></div>
+<table>
+    <tr>
+        <tb>
+            <th> 消息
+                <input id="text" type="text" />
+            </th>
+        </tb>
+        <tb>
+            <th> 用户名
+                <input id="userName" type="text" name="用户名" />
+            </th>
+        </tb>
+    </tr>
+</table>
+<button class="btn btn-primary" onclick="send()">Send</button>
+<!--<button class="btn btn-primary" style="background-color:#666666; display:none;" onclick="login()">login</button>-->
+<button class="btn btn-primary" onclick="login()">login</button>
+<button class="btn btn-danger" onclick="closeWebSocket()">Close</button>
+<script type="text/javascript">
+			             var websocket = null;
+						 function login(){
+						    var userName=document.getElementById('userName').value;　
+						    //判断当前浏览器是否支持WebSocket
+						    if('WebSocket' in window){
+						        websocket = new WebSocket("ws://localhost:8086/api/websocket/"+userName);
+						         //连接发生错误的回调方法
+						    websocket.onerror = function(){
+						        setMessageInnerHTML("error");
+						    };
+
+						    //连接成功建立的回调方法
+						    websocket.onopen = function(event){
+						        setMessageInnerHTML("open");
+
+						    }
+
+						    //接收到消息的回调方法
+						    websocket.onmessage = function(event){
+
+						         setMessageInnerHTML(event.data);
+
+						    }
+
+						    //连接关闭的回调方法
+						    websocket.onclose = function(){
+						        setMessageInnerHTML("close");
+						    }
+						    }
+						    else{
+						        alert('Not support websocket')
+						    }
+						    }
+
+						    //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+						    window.onbeforeunload = function(){
+						        websocket.close();
+						    }
+
+						    //将消息显示在网页上
+						    function setMessageInnerHTML(innerHTML){
+						        document.getElementById('message').innerHTML += innerHTML + '<br/>';
+						    }
+
+						    //关闭连接
+						    function closeWebSocket(){
+						        websocket.close();
+						    }
+
+						    //发送消息
+						    function send(){
+						        var message = document.getElementById('text').value;
+						        websocket.send(message);
+						        message.value("");
+						    }
+		</script>
+</body>
+</html>
