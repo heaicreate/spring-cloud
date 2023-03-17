@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 public class ExerciseUtil {
     @Test
     public void test_list_to_map() {
-        //构建集合
         List<UserPo> userPoList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             UserPo userPo = new UserPo();
@@ -19,6 +18,7 @@ public class ExerciseUtil {
             userPo.setName("测试" + i);
             userPoList.add(userPo);
         }
+
         Map<String, UserPo> userPoMap = userPoList.stream().collect(Collectors.toMap(UserPo::getName, v -> v, (k1, k2) -> k1));
         Map<String, List<UserPo>> userPoMap_list = userPoList.stream().collect(Collectors.groupingBy(UserPo::getName));
         System.out.println(userPoMap);
