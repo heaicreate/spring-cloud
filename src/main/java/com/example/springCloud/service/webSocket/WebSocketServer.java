@@ -49,6 +49,7 @@ public class WebSocketServer {
         this.userName = userName;
         webSocketSet.add(this);     //加入set中
         addOnlineCount();           //在线数加1
+        System.out.println(userName);
         redisUtils.setStr(userName, userName);
         try {
             sendMessage("conn_success");

@@ -68,7 +68,7 @@ public class RedisUtils {
      * @param value
      */
     public void setStr(String key, String value) {
-        RBucket<String> bucket = redissonClient.getBucket(key);
+        RBucket<String> bucket = redissonClient.getBucket(key,StringCodec.INSTANCE);
         bucket.set(value);
     }
 
