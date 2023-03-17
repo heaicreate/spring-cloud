@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class ExerciseUtil {
     @Test
     public void test_list_to_map() {
-        //构建集合
+        //测试
         List<UserPo> userPoList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             UserPo userPo = new UserPo();
