@@ -111,7 +111,7 @@ public class WebSocketServer {
     /**
      * 群发自定义消息
      */
-    public static void sendInfo(String message, @PathParam("userName") String userName) throws IOException {
+    public static void sendInfo(@PathParam("userName") String userName, String message) throws IOException {
         log.info("推送消息到窗口" + userName + "，推送内容:" + message);
         for (WebSocketServer item : webSocketSet) {
             try {

@@ -63,7 +63,7 @@ public class WebsocketController {
         Map<String, Object> result = new HashMap<>();
         try {
 
-            WebSocketServer.sendInfo(message.getUserName(), message.getUserName());
+            WebSocketServer.sendInfo(message.getUserName(), message.getMsg());
             result.put("userName", message.getUserName());
             result.put("msg", message.getMsg());
         } catch (IOException e) {
