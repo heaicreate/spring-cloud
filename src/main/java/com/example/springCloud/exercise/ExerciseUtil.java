@@ -15,12 +15,14 @@ public class ExerciseUtil {
         for (int i = 0; i < 10; i++) {
             UserPo userPo = new UserPo();
             userPo.setAge(i);
-            userPo.setName("测试" + i);
+            userPo.setName("测试1" + i);
             userPoList.add(userPo);
+
         }
 
         Map<String, UserPo> userPoMap = userPoList.stream().collect(Collectors.toMap(UserPo::getName, v -> v, (k1, k2) -> k1));
         Map<String, List<UserPo>> userPoMap_list = userPoList.stream().collect(Collectors.groupingBy(UserPo::getName));
+        System.out.println(userPoMap);
         System.out.println(userPoMap);
 
     }

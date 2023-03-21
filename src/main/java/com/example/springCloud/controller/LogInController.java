@@ -1,5 +1,6 @@
 package com.example.springCloud.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.springCloud.model.Response;
 import com.example.springCloud.po.req.LogInReq;
 import com.example.springCloud.support.ResultWrap;
@@ -24,11 +25,13 @@ public class LogInController {
 
     @PostMapping(value = "/index")
     public Response login(@RequestBody LogInReq logInReq) {
+        log.info("logInReq={}", JSONObject.toJSONString(logInReq));
+        //进行用户登陆检查
         return ResultWrap.ok(true);
     }
 
     @GetMapping(value = "/webSocket")
-    public ModelAndView webSocket(@RequestParam("userName")String userName) {
+    public ModelAndView webSocket(@RequestParam("userName") String userName) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("userName", userName);
         modelAndView.setViewName("websocket");

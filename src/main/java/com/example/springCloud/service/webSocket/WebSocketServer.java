@@ -65,12 +65,14 @@ public class WebSocketServer {
     @OnClose
     public void onClose() {
         log.info("释放的userName为：" + userName);
+        redisUtils.delete(userName);
         webSocketSet.remove(this);  //从set中删除
         subOnlineCount();           //在线数减1
         //断开连接情况下，更新主板占用情况为释放
         //这里写你 释放的时候，要处理的业务
+
         log.info("有一连接关闭！当前在线人数为" + getOnlineCount());
-        redisUtils.delete(userName);
+
     }
 
     /**
@@ -111,7 +113,7 @@ public class WebSocketServer {
     /**
      * 群发自定义消息
      */
-    public static void sendInfo(String message, @PathParam("userName") String userName) throws IOException {
+    public static void sendInfo(@PathParam("userName") String userName, String message) throws IOException {
         log.info("推送消息到窗口" + userName + "，推送内容:" + message);
         for (WebSocketServer item : webSocketSet) {
             try {
