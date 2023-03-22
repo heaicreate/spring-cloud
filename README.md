@@ -80,4 +80,14 @@ sentinel 通过针对 SentinelResource 注解进行aop处理,在我们项目中�
     public static final int ORDER_DEFAULT_CIRCUIT_BREAKER_SLOT = -1500;
     public static final int ORDER_DEGRADE_SLOT = -1000;
     
-在 StatisticNode 类中进行了限流判断后的计数(使用窗口限流 在 MetricBucke 类中建立了 不同event的数组计数 例如:pass等 使用 longAdder)    
+在 StatisticNode 类中进行了限流判断后的计数(使用窗口限流 在 MetricBucke 类中建立了 不同event的数组计数 例如:pass等 使用 longAdder) 
+
+
+
+docker相关
+常用命令:
+docker ps --查看正在运行的容器
+docker ps -a --查看所有容器
+docker images  --查看所有镜像
+docker pull 镜像信息  --拉取镜像
+docker rmi 镜像id    --删除镜像
