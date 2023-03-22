@@ -66,3 +66,18 @@ https://github.com/alibaba/spring-cloud-alibaba/wiki/Sentinel
 启动:java -Dserver.port=8080 -Dcsp.sentinel.dashboard.server=localhost:8080 -Dproject.name=sentinel-dashboard -jar sentinel-dashboard.jar
 访问地址:http://localhost:8080/#/dashboard/flow/spring-cloud
 sentinel进行懒加载方式,资源访问后才会在控制台出现,进行指定资源的设置;sentinel也提供了异常固定返回,在限流等报错情况下可进行自定义错误返回
+
+sentinel 通过针对 SentinelResource 注解进行aop处理,在我们项目中会进行引入包,当在接口上添加了SentinelResource注解那么在调用的时候就会进行aop拦截处理,核心SphU.entry方法进行判断限流等
+本身sentinel 建立不同规则的slot(继承 AbstractLinkedProcessorSlot) 按照我们配置的规则去进行责任链加载 去进行逻辑处理
+调用链顺序
+    public static final int ORDER_NODE_SELECTOR_SLOT = -10000;
+    public static final int ORDER_CLUSTER_BUILDER_SLOT = -9000;
+    public static final int ORDER_LOG_SLOT = -8000;
+    public static final int ORDER_STATISTIC_SLOT = -7000;
+    public static final int ORDER_AUTHORITY_SLOT = -6000;
+    public static final int ORDER_SYSTEM_SLOT = -5000;
+    public static final int ORDER_FLOW_SLOT = -2000;
+    public static final int ORDER_DEFAULT_CIRCUIT_BREAKER_SLOT = -1500;
+    public static final int ORDER_DEGRADE_SLOT = -1000;
+    
+在 StatisticNode 类中进行了限流判断后的计数(使用窗口限流 在 MetricBucke 类中建立了 不同event的数组计数 例如:pass等 使用 longAdder)    
