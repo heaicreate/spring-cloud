@@ -91,3 +91,10 @@ docker ps -a --查看所有容器
 docker images  --查看所有镜像
 docker pull 镜像信息  --拉取镜像
 docker rmi 镜像id    --删除镜像
+docker exec -it 容器id /bin/bash  --进入容器
+docker logs -f --tail 10 容器id   --查看容器日志 
+注意:kafka启动时可能会有机器内存不够 需要设置启动内存信息
+
+?问题
+kafka 在zookeeper中保存了啥信息 如果kafka重启 zookeeper是否一定要重启 遇到过kafka 宕机 没有副本 重启kafka 没有重启zookeeper 消费者一直无法消费消息
+重启zookeeper后再重启kafka 恢复正常
