@@ -98,3 +98,8 @@ docker logs -f --tail 10 容器id   --查看容器日志
 ?问题
 kafka 在zookeeper中保存了啥信息 如果kafka重启 zookeeper是否一定要重启 遇到过kafka 宕机 没有副本 重启kafka 没有重启zookeeper 消费者一直无法消费消息
 重启zookeeper后再重启kafka 恢复正常
+
+
+分布式本地缓存方案
+1:定时更新
+2:是否可采用 有业务服务提供更新接口 然后更新之后 从注册中心获取所有机器的地址进行调用

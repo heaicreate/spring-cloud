@@ -1,8 +1,12 @@
 package com.example.springCloud.controller;
 
+import com.example.springCloud.annotation.FilterModeMethod;
+import com.example.springCloud.designpattern.filter.FilterMode;
+import com.example.springCloud.designpattern.filter.ListMode;
 import com.example.springCloud.fegin.SpringCloudNacosProviderClient;
 import com.example.springCloud.model.Response;
 import com.example.springCloud.po.UserPo;
+import com.example.springCloud.service.impl.FileServiceImpl;
 import com.example.springCloud.support.ResultWrap;
 import com.example.springCloud.util.RedisUtils;
 import com.example.springCloud.util.SlidingWindowCounter;
@@ -11,11 +15,17 @@ import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.lang.reflect.Method;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 @RestController
 @RefreshScope
@@ -32,6 +42,12 @@ public class TestController {
     private String t2;
     @Resource
     SlidingWindowCounter slidingWindowCounter;
+
+    @Autowired
+    FileServiceImpl fileService;
+
+    @Resource
+    private ApplicationContext applicationContext;
 
     @GetMapping("/test")
     public String test() {
@@ -72,6 +88,12 @@ public class TestController {
         userPo.setAge(18);
         System.out.println(slidingWindowCounter.canAccess("test", 10, 3));
         return ResultWrap.ok(userPo);
+    }
+
+    @GetMapping("/test3")
+    public Response<String> getTest3() {
+        fileService.test();
+        return ResultWrap.ok("");
     }
 
 
