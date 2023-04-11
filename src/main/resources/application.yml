@@ -8,9 +8,9 @@ spring:
       enabled: true
     nacos:
      discovery:
-      server-addr: 127.0.0.1:8848
+      server-addr: 47.92.235.151:8848
       auto-register: true
-      namespace: 5e1b94a2-2fb4-425e-8058-27341eddf452
+      namespace:
       register:
         enabled: true
         healthy: true

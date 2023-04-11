@@ -14,6 +14,7 @@ import com.example.springCloud.support.ResultWrap;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,6 +33,8 @@ public class CarController {
     FanoutExchangeProduce fanoutExchangeProduce;
     @Autowired
     MsgProductionService msgProductionService;
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
 
     @Resource
     CarService carService;
@@ -39,6 +42,7 @@ public class CarController {
     @GetMapping(value = "/list")
     @MyLog(name = "测试",requestUrl = "test")
     public Response<List<Car>> getTest(@RequestUser LoginInfo loginInfo) {
+        kafkaTemplate.send("test2","测试");
         log.info("请求");
         List<Car> cars=carService.list();
         log.info("完成");
