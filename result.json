@@ -1,0 +1,130 @@
+[
+    {
+        "jmhVersion" : "1.23",
+        "benchmark" : "com.example.springCloud.jmh.StringConnectTest.testStringAdd",
+        "mode" : "avgt",
+        "threads" : 4,
+        "forks" : 2,
+        "jvm" : "/Library/Java/JavaVirtualMachines/jdk1.8.0_271.jdk/Contents/Home/jre/bin/java",
+        "jvmArgs" : [
+            "-javaagent:/Applications/IntelliJ IDEA CE.app/Contents/lib/idea_rt.jar=57920:/Applications/IntelliJ IDEA CE.app/Contents/bin",
+            "-Dfile.encoding=UTF-8"
+        ],
+        "jdkVersion" : "1.8.0_271",
+        "vmName" : "Java HotSpot(TM) 64-Bit Server VM",
+        "vmVersion" : "25.271-b09",
+        "warmupIterations" : 3,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "5 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "length" : "100"
+        },
+        "primaryMetric" : {
+            "score" : 5336.264638433307,
+            "scoreError" : 546.1997290934169,
+            "scoreConfidence" : [
+                4790.06490933989,
+                5882.464367526723
+            ],
+            "scorePercentiles" : {
+                "0.0" : 4894.449697842279,
+                "50.0" : 5248.285324145054,
+                "90.0" : 5988.568486671485,
+                "95.0" : 6000.3790015543755,
+                "99.0" : 6000.3790015543755,
+                "99.9" : 6000.3790015543755,
+                "99.99" : 6000.3790015543755,
+                "99.999" : 6000.3790015543755,
+                "99.9999" : 6000.3790015543755,
+                "100.0" : 6000.3790015543755
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    4894.449697842279,
+                    6000.3790015543755,
+                    5486.716732349498,
+                    5200.761179435155,
+                    5127.0085132726035
+                ],
+                [
+                    5305.343650510483,
+                    5294.745092793455,
+                    5201.825555496654,
+                    4969.143108353094,
+                    5882.273852725468
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.23",
+        "benchmark" : "com.example.springCloud.jmh.StringConnectTest.testStringBuilderAdd",
+        "mode" : "avgt",
+        "threads" : 4,
+        "forks" : 2,
+        "jvm" : "/Library/Java/JavaVirtualMachines/jdk1.8.0_271.jdk/Contents/Home/jre/bin/java",
+        "jvmArgs" : [
+            "-javaagent:/Applications/IntelliJ IDEA CE.app/Contents/lib/idea_rt.jar=57920:/Applications/IntelliJ IDEA CE.app/Contents/bin",
+            "-Dfile.encoding=UTF-8"
+        ],
+        "jdkVersion" : "1.8.0_271",
+        "vmName" : "Java HotSpot(TM) 64-Bit Server VM",
+        "vmVersion" : "25.271-b09",
+        "warmupIterations" : 3,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "5 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "length" : "100"
+        },
+        "primaryMetric" : {
+            "score" : 973.5054444281602,
+            "scoreError" : 84.4475901186336,
+            "scoreConfidence" : [
+                889.0578543095266,
+                1057.9530345467938
+            ],
+            "scorePercentiles" : {
+                "0.0" : 919.5845967903424,
+                "50.0" : 953.4988480764389,
+                "90.0" : 1085.289801388222,
+                "95.0" : 1089.9376922319902,
+                "99.0" : 1089.9376922319902,
+                "99.9" : 1089.9376922319902,
+                "99.99" : 1089.9376922319902,
+                "99.999" : 1089.9376922319902,
+                "99.9999" : 1089.9376922319902,
+                "100.0" : 1089.9376922319902
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    933.746502800684,
+                    929.6438094938208,
+                    919.5845967903424,
+                    933.2193178793414,
+                    942.5155207090875
+                ],
+                [
+                    964.4821754437903,
+                    1089.9376922319902,
+                    994.6366776474398,
+                    983.8293674907984,
+                    1043.4587837943081
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+]
+
+
