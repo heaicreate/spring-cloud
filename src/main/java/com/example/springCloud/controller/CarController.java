@@ -52,8 +52,8 @@ public class CarController {
         log.info("完成");
         msgProducer.sendMsg(JSON.toJSONString(cars));
         fanoutExchangeProduce.sendMessage();
-        msgProductionService.sendTimeoutMsg("hello1", "routingKey1", 40);
         msgProductionService.sendTimeoutMsg("hello2", "routingKey2", 20);
+        msgProductionService.sendTimeoutMsg("hello1", "routingKey1", 40);
         msgProductionService.sendTimeoutMsg("hello3", "routingKey3", 60);
         return ResultWrap.ok(cars);
     }
