@@ -42,7 +42,11 @@ public class CarController {
     @GetMapping(value = "/list")
     @MyLog(name = "测试",requestUrl = "test")
     public Response<List<Car>> getTest(@RequestUser LoginInfo loginInfo) {
-        kafkaTemplate.send("test3","测试");
+        Car car=new Car();
+        car.setId(1l);
+        car.setPrice(1);
+        car.setName("测试");
+        kafkaTemplate.send("test3",JSON.toJSONString(car));
         log.info("请求");
         List<Car> cars=carService.list();
         log.info("完成");

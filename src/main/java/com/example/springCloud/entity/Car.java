@@ -25,7 +25,7 @@ public class Car implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    private byte[] name;
+    private String name;
 
     private Integer price;
 
