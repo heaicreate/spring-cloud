@@ -1,28 +1,26 @@
-package com.example.springCloud.util;
+package com.example.springCloud.processor;
 
-import com.example.springCloud.processor.GithubRepoPageProcessor;
-import com.example.springCloud.processor.MyDataPipeline;
-import com.example.springCloud.processor.NewsDataUtli;
 import org.joda.time.DateTime;
 import us.codecraft.webmagic.Spider;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class TimeTaskTest extends TimerTask {
+public class StockTimeTaskTest extends TimerTask {
 
 
     public static void main(String[] args) {
         Timer timer = new Timer();
-        timer.schedule(new TimeTaskTest(), 1000, 1000 * 60);
+        timer.schedule(new StockTimeTaskTest(), 0, 1000*60);
 
     }
 
     @Override
     public void run() {
-        Spider.create(new GithubRepoPageProcessor()).addUrl("https://weibo.com/ajax/side/hotSearch").addPipeline(new MyDataPipeline()).thread(5).run();
+        Spider.create(new StockProcessor()).addUrl("https://finance.pae.baidu.com/vapi/v1/getquotation?all=1&pointType=string&group=quotation_minute_ab&query=000155&code=000155").addPipeline(new StockPipeline()).thread(5).run();
+        Spider.create(new StockProcessor()).addUrl("https://finance.pae.baidu.com/vapi/v1/getquotation?all=1&pointType=string&group=quotation_minute_ab&query=002466&code=002466").addPipeline(new StockPipeline()).thread(5).run();
         System.out.println("执行时间:" + new DateTime().toString("yyyy-MM-dd HH:mm:ss"));
-        NewsDataUtli.QueryNewsData();
+
 //        String date = DateTime.now().toString("yyyy-MM-dd");
 //        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 //        DateTime dateTime = dateTimeFormatter.parseDateTime(date + " 18:00:00");

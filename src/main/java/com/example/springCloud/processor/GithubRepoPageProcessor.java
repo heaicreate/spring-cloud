@@ -11,7 +11,7 @@ public class GithubRepoPageProcessor implements PageProcessor {
 
     @Override
     public void process(Page page) {
-        page.putField("demoData", page.getHtml().get());
+        page.putField("realtime", page.getRawText());
     }
 
     @Override
@@ -20,6 +20,7 @@ public class GithubRepoPageProcessor implements PageProcessor {
     }
 
     public static void main(String[] args) {
-        Spider.create(new GithubRepoPageProcessor()).addUrl("https://pdai.tech/md/interview/x-interview.html#_3-1-%E5%B9%B6%E5%8F%91%E5%9F%BA%E7%A1%80").addPipeline(new MyDataPipeline()).thread(5).run();
+        Spider.create(new GithubRepoPageProcessor()).addUrl("https://weibo.com/ajax/side/hotSearch").addPipeline(new MyDataPipeline()).thread(5).run();
+
     }
 }
