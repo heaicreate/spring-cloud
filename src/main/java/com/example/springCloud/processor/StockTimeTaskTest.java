@@ -1,6 +1,8 @@
 package com.example.springCloud.processor;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import us.codecraft.webmagic.Spider;
 
 import java.util.Timer;
@@ -10,15 +12,43 @@ public class StockTimeTaskTest extends TimerTask {
 
 
     public static void main(String[] args) {
+//        Spider.create(new StockProcessor()).addUrl("https://finance.pae.baidu.com/vapi/v1/getquotation?all=1&pointType=string&group=quotation_minute_ab&query=000155&code=000155").addPipeline(new StockDetailPipeline()).thread(5).run();
+
+
+
+        //计算50%
+//        Spider.create(new StockProcessor()).addUrl("https://finance.pae.baidu.com/vapi/v1/blocks/overview?hasTrend=1&market=ab&finClientType=pc").addPipeline(new BlockPipeline()).thread(5).run();
+
         Timer timer = new Timer();
-        timer.schedule(new StockTimeTaskTest(), 0, 1000*60);
+        timer.schedule(new StockTimeTaskTest(), 0, 1000 * 30);
 
     }
 
     @Override
     public void run() {
+        String date = DateTime.now().toString("yyyy-MM-dd");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+        DateTime beginDayDateTime = dateTimeFormatter.parseDateTime(date + " 09:30:00");
+        DateTime endDayDateTime = dateTimeFormatter.parseDateTime(date + " 15:00:00");
+        DateTime startDateTime = dateTimeFormatter.parseDateTime(date + " 12:00:00");
+        DateTime endDateTime = dateTimeFormatter.parseDateTime(date + " 13:00:00");
+        DateTime dateTimeNow = DateTime.now();
+        if (dateTimeNow.isAfter(startDateTime)&&dateTimeNow.isBefore(endDateTime)){
+            return;
+        }
+
+        if (dateTimeNow.isBefore(beginDayDateTime)){
+            return;
+        }
+
+        if (dateTimeNow.isAfter(endDayDateTime)){
+            return;
+        }
+//        Spider.create(new StockProcessor()).addUrl("https://finance.pae.baidu.com/vapi/v1/blocks/overview?hasTrend=1&market=ab&finClientType=pc").addPipeline(new BlockPipeline()).thread(5).run();
+//        Spider.create(new StockProcessor()).addUrl("https://finance.pae.baidu.com/vapi/v1/getquotation?all=1&pointType=string&group=quotation_minute_ab&query=000155&code=000155").addPipeline(new StockDetailPipeline()).thread(5).run();
         Spider.create(new StockProcessor()).addUrl("https://finance.pae.baidu.com/vapi/v1/getquotation?all=1&pointType=string&group=quotation_minute_ab&query=000155&code=000155").addPipeline(new StockPipeline()).thread(5).run();
         Spider.create(new StockProcessor()).addUrl("https://finance.pae.baidu.com/vapi/v1/getquotation?all=1&pointType=string&group=quotation_minute_ab&query=002466&code=002466").addPipeline(new StockPipeline()).thread(5).run();
+//        Spider.create(new StockProcessor()).addUrl("https://finance.pae.baidu.com/vapi/v1/getquotation?all=1&pointType=string&group=quotation_minute_ab&query=300364&code=300364").addPipeline(new StockPipeline()).thread(5).run();
         System.out.println("执行时间:" + new DateTime().toString("yyyy-MM-dd HH:mm:ss"));
 
 //        String date = DateTime.now().toString("yyyy-MM-dd");

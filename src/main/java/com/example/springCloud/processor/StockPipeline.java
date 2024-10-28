@@ -20,8 +20,8 @@ public class StockPipeline implements Pipeline {
         JSONObject basicinfosJSON = jsonObject.getJSONObject("basicinfos");
         JSONObject pankouinfosJSON = jsonObject.getJSONObject("pankouinfos");
         JSONArray pankouinfosList = pankouinfosJSON.getJSONArray("list");
-        JSONArray askinfo = jsonObject.getJSONArray("askinfos");
-        JSONObject askinfoObject = askinfo.getJSONObject(0);
+        JSONArray askinfo = jsonObject.getJSONArray("detailinfos");
+        JSONObject askinfoObject = askinfo.getJSONObject(askinfo.size()-1);
         //获取涨幅
         //000155-川能动力
         //002466-天齐锂业
@@ -34,7 +34,7 @@ public class StockPipeline implements Pipeline {
         Double highValue = 0.000;
         Double openPrice = 0.000;
         //现价
-        Double nowPrice = askinfoObject.getDouble("askprice");
+        Double nowPrice = askinfoObject.getDouble("price");
         //涨停
         String limitUp = "";
         for (int i = 0; i < pankouinfosList.size(); i++) {
@@ -67,7 +67,7 @@ public class StockPipeline implements Pipeline {
          * String DEFAULT_FG = "39";
          */
         String stringFormat = "涨跌幅:%S,状态:%s,今天最高:%s,现价:%s,涨停:%s,今开:%s";
-        if (Double.compare(nowPrice, highValue) >= 1) {
+        if (priceLimitStatus.equals("up")) {
             System.out.println("\033[31m" + String.format(stringFormat, priceLimitValue, priceLimitStatus, highValue, nowPrice, limitUp,openPrice + "\033[0m"));
         } else {
             System.out.println("\033[32m" + String.format(stringFormat, priceLimitValue, priceLimitStatus, highValue, nowPrice, limitUp,openPrice + "\033[0m"));
@@ -79,6 +79,11 @@ public class StockPipeline implements Pipeline {
 //            System.out.println("" + priceLimitValue + "" + limitUp + "" + priceLimitStatus);
 //        }
 
-
     }
+
+
+
+    class detailinfos{
+    }
+
 }

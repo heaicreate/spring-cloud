@@ -20,7 +20,7 @@ public class ExerciseUtil {
 
         }
 
-        Map<String, UserPo> userPoMap = userPoList.stream().collect(Collectors.toMap(UserPo::getName, v -> v, (k1, k2) -> k1));
+        Map<String, UserPo> userPoMap = userPoList.stream().collect(Collectors. toMap(UserPo::getName, v -> v, (k1, k2) -> k1));
         Map<String, List<UserPo>> userPoMap_list = userPoList.stream().collect(Collectors.groupingBy(UserPo::getName));
         System.out.println(userPoMap);
         System.out.println(userPoMap);

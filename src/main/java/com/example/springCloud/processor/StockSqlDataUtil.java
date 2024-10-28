@@ -24,6 +24,9 @@ public class StockSqlDataUtil {
             if ("002466".equals(code)) {
                 codeName="天齐锂业";
             }
+            if ("300364".equals(code)) {
+                codeName="中文在线";
+            }
             if (Objects.isNull(stockData)) {
                 StringBuilder stringBuilder = new StringBuilder("insert into stock_data (code_value,code_name,price_limit_value,price_limit_status,now_price,open_price,limit_up,create_time,create_day,high_price) values");
                 stringBuilder.append(String.format("('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')", code, codeName, priceLimitValue, priceLimitStatus,nowPrice,openPrice, limitUp,new DateTime().getMillis(),new DateTime().toString("yyyy-MM-dd"),highValue));

@@ -109,7 +109,8 @@ public class HttpUtil {
         HttpEntity entity = null;
         try {
             HttpGet httpGet = new HttpGet(url);
-            httpGet.setHeader("accept","application/vnd.finance-web.v1+json");
+            httpGet.setHeader("accept","application/json, text/javascript, */*; q=0.01");
+            httpGet.setHeader("User-Agent","PostmanRuntime/7.26.5");
             response = httpclient.execute(httpGet);
             // int statusCode = response.getStatusLine().getStatusCode();
 
